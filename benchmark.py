@@ -5,7 +5,7 @@ from mlx_lm import load, generate
 model_path = "mlx-community/Qwen2.5-7B-Instruct-4bit"
 
 print("🔄 Carregando o modelo na Memória Unificada do M5... (Aguarde)")
-model, tokenizer = load(model_path)
+model, tokenizer = load(model_path)[:2]
 print("✅ Modelo carregado e pronto!\n")
 
 # Histórico da conversa usando a estrutura de chat do modelo
@@ -40,7 +40,8 @@ while True:
         model, 
         tokenizer, 
         prompt=prompt, 
-        verbose=True   # Oculta logs internos de performance durante o chat
+        max_tokens=1024,  # <-- Added this line (you can adjust this number as needed)
+        verbose=True   
     )
     
     print(response)
